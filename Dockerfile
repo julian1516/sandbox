@@ -28,4 +28,4 @@ RUN wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VER
 ## Copie du script.sh présent dans le répertoire du dockerfile, changement des droits.
 RUN curl -LO https://github.com/julian1516/sandbox/script.sh
 RUN chmod +x script.sh
-CMD ["./script.sh"]
+CMD ["/bin/bash", "-c", "./script.sh && tail -f /dev/null"]
