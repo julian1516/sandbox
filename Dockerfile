@@ -32,4 +32,4 @@ RUN wget https://github.com/julian1516/sandbox/blob/main/script.sh
 RUN chmod +x script.sh
 
 # Définissez le script comme commande d'exécution par défaut pour le conteneur
-CMD ["./script.sh"]
+ENTRYPOINT ["/script.sh"]
