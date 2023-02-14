@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: get-etcd-secret
+spec:
+  schedule: "00 14 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: etcd-secret-viewer
+          containers:
+          - name: etcd-secret
+            image: image-registry.openshift-image-registry.svc:5000/etcd-secret-backup/etcd-secret-backup
+            env: 
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault-token
+                  key: token
+          restartPolicy: OnFailure

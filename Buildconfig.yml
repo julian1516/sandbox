@@ -1,0 +1,22 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: etcd-secret
+  labels:
+    app: etcd-secret-backup
+spec:
+  source:
+    type: Git
+    sourceSecret:
+      name: token-git
+    git:
+      uri: https://outils.docapost.tech/gitlab/jdore/get-secret-etcd.git
+      ref: "main"
+  strategy:
+    type: Docker                      
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: etcd-secret-backup:latest
